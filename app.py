@@ -24,7 +24,22 @@ X = melbourne_data[melbourne_features]
 print(" --- Describe X --- ")
 print(X.describe())
 
-# Building Your Model
+print(" --- Head of X --- ")
+print(X.head())
 
+# Building Your Model
+from sklearn.tree import DecisionTreeRegressor
+
+# Define model. Specify a number for random_state to ensure same results each run
+melbourne_model = DecisionTreeRegressor(random_state=1)
+
+# Fit model
+melbourne_model.fit(X, y)
+
+# Make predictions for the first 5 houses. These are the predicted prices.
+print("Making predictions for the following 5 houses:")
+print(X.head())
+print("The predictions are")
+print(melbourne_model.predict(X.head()))
 
 
