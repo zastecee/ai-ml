@@ -89,3 +89,6 @@ print(results.head())
 #     "Predicted": val_predictions
 # })
 # results.head()
+
+# print("First in-sample predictions:", iowa_model.predict(X.head()))
+# print("Actual target values for those homes:", y.head().tolist())
