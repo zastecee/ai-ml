@@ -19,7 +19,8 @@ melbourne_data = melbourne_data.dropna(axis=0)
 y = melbourne_data.Price
 
 # Choosing "Features"
-melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'Lattitude', 'Longtitude']
+melbourne_features = ['Rooms', 'Bathroom', 'Landsize', 'BuildingArea', 
+                        'YearBuilt', 'Lattitude', 'Longtitude']
 X = melbourne_data[melbourne_features]
 print(" --- Describe X --- ")
 print(X.describe())
@@ -42,4 +43,31 @@ print(X.head())
 print("The predictions are")
 print(melbourne_model.predict(X.head()))
 
+# What is Model Validation
+from sklearn.metrics import mean_absolute_error
 
+predicted_home_prices = melbourne_model.predict(X)
+print("--- Mean Absolute Error ---")
+print(mean_absolute_error(y, predicted_home_prices))
+
+# The Problem with "In-Sample" Scores
+# The measure we just computed can be called an "in-sample" score. We used a single "sample" of houses for both building the model and evaluating it.
+
+# Out-of-sample
+from sklearn.model_selection import train_test_split
+# split data into training and validation data, for both features and target
+# The split is based on a random number generator. Supplying a numeric value to
+# the random_state argument guarantees we get the same split every time we
+# run this script.
+train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=1)
+
+# Define model
+melbourne_model_2 = DecisionTreeRegressor()
+
+# Fit model
+melbourne_model_2.fit(train_X, train_y)
+
+# get predicted prices on validation data
+val_predictions = melbourne_model_2.predict(val_X)
+print("--- Mean Absolute Error In Validation Data ---")
+print(mean_absolute_error(val_y, val_predictions))
