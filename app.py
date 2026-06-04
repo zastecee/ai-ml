@@ -71,3 +71,21 @@ melbourne_model_2.fit(train_X, train_y)
 val_predictions = melbourne_model_2.predict(val_X)
 print("--- Mean Absolute Error In Validation Data ---")
 print(mean_absolute_error(val_y, val_predictions))
+
+
+# print the top few validation predictions
+print(val_predictions[:5])
+# print the top few actual prices from validation data
+print(val_y[:5])
+
+results = pd.DataFrame({
+    "Actual": val_y.values,
+    "Predicted": val_predictions
+})
+print(results.head())
+
+# results = pd.DataFrame({
+#     "Actual": val_y.values,
+#     "Predicted": val_predictions
+# })
+# results.head()
