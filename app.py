@@ -117,3 +117,13 @@ best_tree_size = min(scores, key=scores.get)
 # Fit Model Using All Data
 final_model = DecisionTreeRegressor(max_leaf_nodes=best_tree_size, random_state=1)
 final_model.fit(X, y)
+
+
+
+# Random Forests
+from sklearn.ensemble import RandomForestRegressor
+
+forest_model = RandomForestRegressor(random_state=1)
+forest_model.fit(train_X, train_y)
+melb_preds = forest_model.predict(val_X)
+print("Random Forest MAE: ", mean_absolute_error(val_y, melb_preds))
